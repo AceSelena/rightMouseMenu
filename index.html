@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style type="text/css">
+    #box > div {
+      width: 100px;
+      height: 30px;
+      border: 1px solid gray;
+    }
+  </style>
+</head>
+<body>
+<div id="box" style="display: none;position: absolute">
+  <div>功能1</div>
+  <div>功能2</div>
+</div>
+<script type="text/javascript">
+    window.onload = function () {
+        document.oncontextmenu = function () {
+            return false
+        };   //禁止鼠标右键菜单显示
+        var res = document.getElementById('box');   //找到id为box的div
+        document.onmousedown = function (e) {   //在body里点击触发事件
+            if (e.button === 2) {    //如果button=1（鼠标左键），button=2（鼠标右键），button=0（鼠标中间键）
+                console.log(e);   //将传进去的参数打印出来
+                console.log(e.offsetY);   //打印出鼠标点击的Y轴坐标
+                console.log(e.offsetX);   //打印出鼠标点击的X轴坐标
+                res.style.top = e.offsetY + 'px';   //鼠标点击时给div定位Y轴
+                res.style.left = e.offsetX + 'px';  //鼠标点击时给div定位X轴
+                res.style.display = 'block';    //显示div盒子
+            } else {
+                res.style.display = 'none';     //否则不显示div盒子
+            }
+
+        }
+    }
+
+</script>
+</body>
+</html>
